@@ -2,17 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { ChakraProvider } from "@chakra-ui/react";
-import { HashBrowser } from "react-router-dom";
+import { extendTheme, ChakraProvider } from "@chakra-ui/react";
+import { HashRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+
+const colors = {
+  brand: {
+    100: "#D6F2FF4D",
+  },
+};
+const theme = extendTheme({ colors });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <HashBrowser>
+    <ChakraProvider theme={theme}>
+      <HashRouter>
         <App />
-      </HashBrowser>
+      </HashRouter>
     </ChakraProvider>
   </React.StrictMode>
 );
