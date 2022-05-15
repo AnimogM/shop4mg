@@ -3,8 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
+import AppProvider from "./context/context";
 
 const colors = {
   brand: {
@@ -17,9 +18,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <HashRouter>
-        <App />
-      </HashRouter>
+      <BrowserRouter>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
 );

@@ -1,14 +1,13 @@
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { useGlobalContext } from "../context/context";
+
 
 const Cart = ({ d }) => {
+  const {onOpen, state} = useGlobalContext()
   return (
-    <Box
-      pos="relative"
-      display={d}
-      cursor="pointer"
-    >
+    <Box onClick={onOpen} pos="relative" display={d} cursor="pointer">
       <FaShoppingCart size={20} />
       <Text
         color="red.300"
@@ -20,7 +19,7 @@ const Cart = ({ d }) => {
         bottom="3"
         left="3"
       >
-        0
+        {state.totalAmount}
       </Text>
     </Box>
   );
