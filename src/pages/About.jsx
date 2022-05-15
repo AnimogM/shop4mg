@@ -1,7 +1,7 @@
 import { Box, Heading, Image, Stack, Text } from "@chakra-ui/react";
 
 import Layout from "../layout";
-import BG from "../assets/contact.png"
+import BG from "../assets/contact.png";
 
 const About = () => {
   return (
@@ -11,11 +11,13 @@ const About = () => {
           <Box w={["full", "50%"]}>
             <Heading letterSpacing="wider">About Us</Heading>
             <Text mt="10" lineHeight="7" fontSize={["sm", "md"]}>
-              shop4mg is a trusted and reliable online platform that allows you
-              to report cases of missing or kidnapped persons in and within your
-              locality and across Nigeria. We create awareness through our
-              information channels, collaborate with relevat security agencies
-              and the general public towards a safer Nigeria.
+              shop4mg is a trusted and reliable online platform that helps
+              people save money and live better. shop4mg International delivers
+              on this promise by bringing value and convenience to millions of
+              customers in 23 countries outside the Nigeria. Our unique global
+              perspective makes it possible to see connections that others
+              cannot and to bring innovations to market that make life easier
+              for customers.
             </Text>
           </Box>
           <Box>
@@ -29,7 +31,7 @@ const About = () => {
             border="2px solid"
             mx="auto"
             p="5"
-            w="400px"
+            maxW="400px"
             borderColor="red.200"
             mt="3"
             rounded="2xl"
