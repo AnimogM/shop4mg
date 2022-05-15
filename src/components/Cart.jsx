@@ -20,7 +20,7 @@ const Cart = () => {
     onClose,
     isOpen,
     state: { cartItems, totalAmount, totalPrice },
-    dispatch,
+    clearCart,
   } = useGlobalContext();
   return (
     <Drawer size={"sm"} isOpen={isOpen} onClose={onClose} placement={"right"}>
@@ -66,7 +66,7 @@ const Cart = () => {
           <Button
             colorScheme="red"
             w="full"
-            onClick={() => dispatch({ type: "CLEARCART" })}
+            onClick={clearCart}
           >
             Clear cart
           </Button>

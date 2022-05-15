@@ -27,7 +27,7 @@ const Cart = ({ d }) => {
 
 const Header = () => {
   return (
-    <Box px={["5", "16"]} py="4">
+    <Box px={["5", "16"]} py="4" pos="sticky" top="0" bg="white" shadow="md" zIndex={10}>
       <Stack
         direction={["column", "row"]}
         align={{ md: "center" }}

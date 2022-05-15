@@ -1,6 +1,8 @@
 import { Button, Image, Text, VStack } from "@chakra-ui/react";
+import { useGlobalContext } from "../context/context";
 
-const Product = ({ title, image, price }) => {
+const Product = ({ title, image, price, id }) => {
+  const { addItem } = useGlobalContext();
   return (
     <VStack
       spacing={5}
@@ -16,7 +18,13 @@ const Product = ({ title, image, price }) => {
       <Image src={image} alt={title} boxSize="150" objectFit="contain" />
       <Text textAlign="center">{title}</Text>
       <Text color="red.600">${price}</Text>
-      <Button justifySelf="end" colorScheme="blue">Add to Cart</Button>
+      <Button
+        justifySelf="end"
+        colorScheme="blue"
+        onClick={() => addItem(id, title, image, price)}
+      >
+        Add to Cart
+      </Button>
     </VStack>
   );
 };

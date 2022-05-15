@@ -3,7 +3,7 @@ import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { useGlobalContext } from "../context/context";
 
 const CartItem = ({ title, price, amount, image, id }) => {
-  const { dispatch } = useGlobalContext();
+  const { removeItem, decreaseItem, increaseItem } = useGlobalContext();
   return (
     <Grid templateColumns="repeat(5, 1fr)" align="center" gap="5">
       <GridItem colSpan={1}>
@@ -11,10 +11,12 @@ const CartItem = ({ title, price, amount, image, id }) => {
       </GridItem>
       <GridItem colSpan={3}>
         <VStack spacing="0" align="start">
-          <Text fontSize={12} textAlign="start">
+          <Text fontSize=".9rem" fontWeight="600" textAlign="start">
             {title}
           </Text>
-          <Text fontStyle="italic">${price}</Text>
+          <Text fontSize=".9rem" fontStyle="italic">
+            ${price}
+          </Text>
           <Text
             fontWeight="light"
             fontSize="14"
@@ -22,7 +24,7 @@ const CartItem = ({ title, price, amount, image, id }) => {
             variant="ghost"
             cursor="pointer"
             _hover={{ color: "red.300" }}
-            onClick={() => dispatch({ type: "REMOVE", payload: id })}
+            onClick={() => removeItem(id)}
           >
             remove
           </Text>
@@ -30,15 +32,9 @@ const CartItem = ({ title, price, amount, image, id }) => {
       </GridItem>
       <GridItem colSpan={1}>
         <VStack spacing="1" alignSelf="end" textAlign="end">
-          <FaChevronUp
-            cursor="pointer"
-            onClick={() => dispatch({ type: "INCREASE" })}
-          />
+          <FaChevronUp cursor="pointer" onClick={() => increaseItem(id)} />
           <Text>{amount}</Text>
-          <FaChevronDown
-            cursor="pointer"
-            onClick={() => dispatch({ type: "DECREASE" })}
-          />
+          <FaChevronDown cursor="pointer" onClick={() => decreaseItem(id)} />
         </VStack>
       </GridItem>
     </Grid>

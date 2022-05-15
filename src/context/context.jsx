@@ -27,12 +27,39 @@ const cart = {
 };
 
 const AppProvider = ({ children }) => {
-  // const [isOpen, setIsOpen] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, dispatch] = useReducer(reducer, cart);
 
+  const removeItem = (id) => {
+    dispatch({ type: "REMOVE", payload: id });
+  };
+  const addItem = (id, title, image, price) => {
+    dispatch({ type: "ADD", payload: { id, image, title, price } });
+  };
+  const clearCart = () => {
+    dispatch({ type: "CLEARCART" });
+  };
+  const increaseItem = (id) => {
+    dispatch({ type: "INCREASE", payload: id });
+  };
+  const decreaseItem = (id) => {
+    dispatch({ type: "DECREASE", payload: id });
+  };
+
   return (
-    <AppContext.Provider value={{ isOpen, onOpen, onClose, dispatch, state }}>
+    <AppContext.Provider
+      value={{
+        isOpen,
+        removeItem,
+        increaseItem,
+        decreaseItem,
+        onOpen,
+        onClose,
+        clearCart,
+        addItem,
+        state,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
