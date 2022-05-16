@@ -5,7 +5,7 @@ import App from "./App";
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import AppProvider from "./context/context";
+import CartProvider from "./context/CartContext";
 
 const colors = {
   brand: {
@@ -19,9 +19,9 @@ root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <BrowserRouter>
-        <AppProvider>
+        <CartProvider>
           <App />
-        </AppProvider>
+        </CartProvider>
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>

@@ -1,9 +1,16 @@
 import { useContext, createContext, useReducer } from "react";
-import reducer from "../reducer/reducer.js";
+import reducer from "../reducer/cartReducer.js";
+import {
+  CLEAR_CART,
+  ADD_TO_CART,
+  INCREASE_ITEM_CART,
+  DECREASE_ITEM_CART,
+  REMOVE_ITEM_CART,
+} from "../actions";
 import IMG from "../assets/cool-background 2.png";
 import { useDisclosure } from "@chakra-ui/react";
 
-const AppContext = createContext();
+const CartContext = createContext();
 
 const cart = {
   totalPrice: 300,
@@ -26,33 +33,33 @@ const cart = {
   ],
 };
 
-const AppProvider = ({ children }) => {
+const CartProvider = ({ children }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, dispatch] = useReducer(reducer, cart);
 
   const removeItem = (id) => {
-    dispatch({ type: "REMOVE", payload: id });
+    dispatch({ type: REMOVE_ITEM_CART, payload: id });
   };
-  const addItem = (id, title, image, price) => {
-    dispatch({ type: "ADD", payload: { id, image, title, price } });
+  const addItem = (props) => {
+    dispatch({ type: ADD_TO_CART, payload: props });
   };
   const clearCart = () => {
-    dispatch({ type: "CLEARCART" });
+    dispatch({ type: CLEAR_CART });
   };
-  const increaseItem = (id) => {
-    dispatch({ type: "INCREASE", payload: id });
+  const increaseCartItem = (id) => {
+    dispatch({ type: INCREASE_ITEM_CART, payload: id });
   };
-  const decreaseItem = (id) => {
-    dispatch({ type: "DECREASE", payload: id });
+  const decreaseCartItem = (id) => {
+    dispatch({ type: DECREASE_ITEM_CART, payload: id });
   };
 
   return (
-    <AppContext.Provider
+    <CartContext.Provider
       value={{
         isOpen,
         removeItem,
-        increaseItem,
-        decreaseItem,
+        increaseCartItem,
+        decreaseCartItem,
         onOpen,
         onClose,
         clearCart,
@@ -61,11 +68,11 @@ const AppProvider = ({ children }) => {
       }}
     >
       {children}
-    </AppContext.Provider>
+    </CartContext.Provider>
   );
 };
-export default AppProvider;
+export default CartProvider;
 
 export const useGlobalContext = () => {
-  return useContext(AppContext);
+  return useContext(CartContext);
 };

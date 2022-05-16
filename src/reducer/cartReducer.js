@@ -11,9 +11,17 @@
 //     },
 //   ],
 // };
+import {
+  CLEAR_CART,
+  ADD_TO_CART,
+  INCREASE_ITEM_CART,
+  DECREASE_ITEM_CART,
+  REMOVE_ITEM_CART,
+} from "../actions";
+
 export default function reducer(state, action) {
   switch (action.type) {
-    case "CLEARCART":
+    case CLEAR_CART:
       return { ...state, cartItems: [] };
     case "REMOVE":
       return {
@@ -22,21 +30,20 @@ export default function reducer(state, action) {
           (items) => action.payload !== items.id
         ),
       };
-    case "ADD":
+    case ADD_TO_CART:
       const data = {
         title: action.payload.title,
         price: action.payload.price,
         amount: 1,
         id: action.payload.id,
         image: action.payload.image,
-      }
+      };
       return {
         ...state,
         cartItems: state.cartItems.reduce((accum, item) => {
           if (accum.lenght === 0) {
             accum.push(data);
-          }
-          else if (item.id === action.payload.id) {
+          } else if (item.id === action.payload.id) {
             item = { ...item, amount: item.amount + 1 };
           } else {
             accum.push(data);

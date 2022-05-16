@@ -11,7 +11,7 @@ import {
   DrawerFooter,
   Button,
 } from "@chakra-ui/react";
-import { useGlobalContext } from "../context/context";
+import { useGlobalContext } from "../context/CartContext";
 // import { FaTimes } from "react-icons/fa";
 import CartItem from "./CartItem";
 

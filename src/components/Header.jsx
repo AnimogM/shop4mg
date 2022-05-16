@@ -1,7 +1,7 @@
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-import { useGlobalContext } from "../context/context";
+import { useGlobalContext } from "../context/CartContext";
 
 
 const Cart = ({ d }) => {

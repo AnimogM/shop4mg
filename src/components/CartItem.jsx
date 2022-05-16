@@ -1,9 +1,9 @@
 import { Grid, GridItem, Image, Text, VStack } from "@chakra-ui/react";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
-import { useGlobalContext } from "../context/context";
+import { useGlobalContext } from "../context/CartContext";
 
 const CartItem = ({ title, price, amount, image, id }) => {
-  const { removeItem, decreaseItem, increaseItem } = useGlobalContext();
+  const { removeItem, decreaseCartItem, increaseCartItem } = useGlobalContext();
   return (
     <Grid templateColumns="repeat(5, 1fr)" align="center" gap="5">
       <GridItem colSpan={1}>
@@ -32,9 +32,9 @@ const CartItem = ({ title, price, amount, image, id }) => {
       </GridItem>
       <GridItem colSpan={1}>
         <VStack spacing="1" alignSelf="end" textAlign="end">
-          <FaChevronUp cursor="pointer" onClick={() => increaseItem(id)} />
+          <FaChevronUp cursor="pointer" onClick={() => increaseCartItem(id)} />
           <Text>{amount}</Text>
-          <FaChevronDown cursor="pointer" onClick={() => decreaseItem(id)} />
+          <FaChevronDown cursor="pointer" onClick={() => decreaseCartItem(id)} />
         </VStack>
       </GridItem>
     </Grid>

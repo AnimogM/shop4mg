@@ -1,7 +1,8 @@
 import { Button, Image, Text, VStack } from "@chakra-ui/react";
-import { useGlobalContext } from "../context/context";
+import { useGlobalContext } from "../context/CartContext";
 
-const Product = ({ title, image, price, id }) => {
+const Product = (props) => {
+  const { title, image, price } = props;
   const { addItem } = useGlobalContext();
   return (
     <VStack
@@ -21,7 +22,7 @@ const Product = ({ title, image, price, id }) => {
       <Button
         justifySelf="end"
         colorScheme="blue"
-        onClick={() => addItem(id, title, image, price)}
+        onClick={() => addItem(props)}
       >
         Add to Cart
       </Button>
