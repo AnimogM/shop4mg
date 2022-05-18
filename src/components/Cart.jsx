@@ -11,15 +11,15 @@ import {
   DrawerFooter,
   Button,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context/CartContext";
-// import { FaTimes } from "react-icons/fa";
 import CartItem from "./CartItem";
 
 const Cart = () => {
   const {
     onClose,
     isOpen,
-    state: { cartItems, totalAmount, totalPrice },
+    state: { cartItems, totalPrice },
     clearCart,
   } = useGlobalContext();
   return (
@@ -38,14 +38,9 @@ const Cart = () => {
         <DrawerBody>
           {cartItems.length === 0 ? (
             <Box mt="10" textAlign="center">
-              <Text>Your cart is empty</Text>
-              <Button
-                variant="outline"
-                w="200px"
-                colorScheme="blue"
-                mt="10"
-              >
-                continue shopping
+              <Text>is currently empty</Text>
+              <Button variant="outline" w="200px" onClick={onClose} colorScheme="blue" mt="10">
+                <Link to="/store">continue shopping</Link>
               </Button>
             </Box>
           ) : (
@@ -58,16 +53,11 @@ const Cart = () => {
         </DrawerBody>
         <DrawerFooter flexDirection="column">
           <Box mb="5">
-            <Text>{totalAmount}</Text>
             <Text fontWeight="bold" color="blue.600">
               total: ${totalPrice}
             </Text>
           </Box>
-          <Button
-            colorScheme="red"
-            w="full"
-            onClick={clearCart}
-          >
+          <Button colorScheme="red" w="full" onClick={clearCart}>
             Clear cart
           </Button>
         </DrawerFooter>

@@ -1,4 +1,4 @@
-import { useContext, createContext, useReducer } from "react";
+import { useContext, createContext, useReducer, useEffect } from "react";
 import reducer from "../reducer/cartReducer.js";
 import {
   CLEAR_CART,
@@ -6,31 +6,16 @@ import {
   INCREASE_ITEM_CART,
   DECREASE_ITEM_CART,
   REMOVE_ITEM_CART,
+  GET_TOTAL,
 } from "../actions";
-import IMG from "../assets/cool-background 2.png";
 import { useDisclosure } from "@chakra-ui/react";
 
 const CartContext = createContext();
 
 const cart = {
-  totalPrice: 300,
-  totalAmount: 2,
-  cartItems: [
-    {
-      title: "Mens Casual Premium Slim Fit T-Shirts ",
-      price: "300",
-      amount: 1,
-      id: 1,
-      image: IMG,
-    },
-    {
-      title: "Mens Casual ",
-      price: "300",
-      amount: 1,
-      id: 2,
-      image: IMG,
-    },
-  ],
+  totalPrice: 0,
+  totalAmount: 0,
+  cartItems: [],
 };
 
 const CartProvider = ({ children }) => {
@@ -41,7 +26,7 @@ const CartProvider = ({ children }) => {
     dispatch({ type: REMOVE_ITEM_CART, payload: id });
   };
   const addItem = (props) => {
-    dispatch({ type: ADD_TO_CART, payload: props });
+    dispatch({ type: ADD_TO_CART, payload: { ...props } });
   };
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
@@ -52,6 +37,10 @@ const CartProvider = ({ children }) => {
   const decreaseCartItem = (id) => {
     dispatch({ type: DECREASE_ITEM_CART, payload: id });
   };
+
+  useEffect(() => {
+    dispatch({ type: GET_TOTAL });
+  }, [state.cartItems]);
 
   return (
     <CartContext.Provider

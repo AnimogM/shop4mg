@@ -1,29 +1,17 @@
-// const cart = {
-//   totalPrice: 300,
-//   totalAmount: 2,
-//   cartItems: [
-//     {
-//       title: "Mens Casual Premium Slim Fit T-Shirts ",
-//       price: "300",
-//       amount: 1,
-//       id: 1,
-//       image: IMG,
-//     },
-//   ],
-// };
 import {
   CLEAR_CART,
   ADD_TO_CART,
   INCREASE_ITEM_CART,
   DECREASE_ITEM_CART,
   REMOVE_ITEM_CART,
+  GET_TOTAL,
 } from "../actions";
 
 export default function reducer(state, action) {
   switch (action.type) {
     case CLEAR_CART:
       return { ...state, cartItems: [] };
-    case "REMOVE":
+    case REMOVE_ITEM_CART:
       return {
         ...state,
         cartItems: state.cartItems.filter(
@@ -31,36 +19,56 @@ export default function reducer(state, action) {
         ),
       };
     case ADD_TO_CART:
-      const data = {
-        title: action.payload.title,
-        price: action.payload.price,
-        amount: 1,
-        id: action.payload.id,
-        image: action.payload.image,
-      };
+      const { id, title, price, image } = action.payload;
+      const tempItem = state.cartItems.find((item) => item.id === id);
+      if (tempItem) {
+        const tempCart = state.cartItems.map((item) => {
+          if (item.id === id) {
+            item = { ...item, amount: item.amount + 1};
+          }
+          return item;
+        });
+        return { ...state, cart: tempCart };
+      }
+      const newItem = { id, title, price, image, amount: 1 };
+      console.log("not")
+      return { ...state, cartItems: [...state.cartItems, newItem] };
+    case INCREASE_ITEM_CART:
       return {
         ...state,
-        cartItems: state.cartItems.reduce((accum, item) => {
-          if (accum.lenght === 0) {
-            accum.push(data);
-          } else if (item.id === action.payload.id) {
-            item = { ...item, amount: item.amount + 1 };
-          } else {
-            accum.push(data);
+        cartItems: state.cartItems.map((items) => {
+          if (action.payload === items.id) {
+            return { ...items, amount: items.amount + 1 };
           }
-
-          return accum;
-        }, []),
+          return items;
+        }),
       };
+    case DECREASE_ITEM_CART:
+      return {
+        ...state,
+        cartItems: state.cartItems.map((items) => {
+          if (action.payload === items.id) {
+            return { ...items, amount: items.amount - 1 };
+          }
+          return items;
+        }),
+      };
+    case GET_TOTAL:
+      let { totalPrice, totalAmount } = state.cartItems.reduce(
+        (cartTotal, items) => {
+          const { price, amount } = items;
+          const itemTotal = price * amount;
+
+          cartTotal.totalPrice += itemTotal;
+          cartTotal.totalAmount += amount;
+          return cartTotal;
+        },
+        { totalPrice: 0, totalAmount: 0 }
+      );
+
+      totalPrice = parseFloat(totalPrice.toFixed(2));
+      return { ...state, totalAmount, totalPrice };
     default:
       return state;
   }
 }
-
-// state.cartItems.push({
-//   title: action.payload.title,
-//   price: action.payload.price,
-//   amount: 1,
-//   id: action.payload.id,
-//   image: action.payload.image,
-// });

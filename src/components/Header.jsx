@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useGlobalContext } from "../context/CartContext";
 
 
-const Cart = ({ d }) => {
+const Cart = ({ d, b }) => {
   const {onOpen, state} = useGlobalContext()
   return (
     <Box onClick={onOpen} pos="relative" display={d} cursor="pointer">
@@ -13,10 +13,14 @@ const Cart = ({ d }) => {
         color="red.300"
         bg="blue.600"
         rounded="full"
-        px="5px"
+        w="5"
+        h="6"
+        fontSize={14}
+        display="grid"
+        placeItems="center"
         zIndex="10"
         pos="absolute"
-        bottom="3"
+        bottom={b}
         left="3"
       >
         {state.totalAmount}
@@ -45,7 +49,7 @@ const Header = () => {
             </Text>
           </Link>
 
-          <Cart d={ ["block", "none"]}/>
+          <Cart d={ ["block", "none"]} b="4"/>
         </Flex>
         <Flex align="center" alignSelf="center" justify="center" gap="5">
           <Link to="/">
@@ -61,7 +65,7 @@ const Header = () => {
             <Text _hover={{ color: "red.300" }}>Contact</Text>
           </Link>
         </Flex>
-        <Cart d={["none", "block"]} />
+        <Cart d={["none", "block"]} b="3"/>
       </Stack>
     </Box>
   );

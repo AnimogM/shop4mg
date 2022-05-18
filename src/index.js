@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { extendTheme, ChakraProvider } from "@chakra-ui/react";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import CartProvider from "./context/CartContext";
 
@@ -18,11 +18,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <BrowserRouter>
+      <HashRouter>
         <CartProvider>
           <App />
         </CartProvider>
-      </BrowserRouter>
+      </HashRouter>
     </ChakraProvider>
   </React.StrictMode>
 );

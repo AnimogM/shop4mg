@@ -22,6 +22,7 @@ const Product = (props) => {
       <Button
         justifySelf="end"
         colorScheme="blue"
+        size="md"
         onClick={() => addItem(props)}
       >
         Add to Cart
