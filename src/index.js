@@ -18,11 +18,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <HashRouter>
+      <BrowserRouter>
         <CartProvider>
           <App />
         </CartProvider>
-      </HashRouter>
+      </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>
 );
