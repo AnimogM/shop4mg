@@ -1,5 +1,5 @@
 # shop4mg
-An ecommerce web app
+An e-commerce platform designed to help users shop online, support local businesses and communities.
 
 # Built With
 - react
