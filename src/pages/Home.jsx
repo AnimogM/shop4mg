@@ -9,6 +9,7 @@ import {
 import Layout from "../layout";
 import HeroBg from "../assets/cool-background 2.png";
 import Category from "../components/Category";
+import { Link } from "react-router-dom";
 
 const categories = [
   {
@@ -44,16 +45,18 @@ const Home = () => {
             Jeweleries, Clothing and Electronics
           </Heading>
           <Text>Embrace your choices - we do</Text>
-          <Button
-            variant="solid"
-            w="200px"
-            aria-label="shop now"
-            colorScheme="red"
-            size="lg"
-            mt="10"
-          >
-            SHOP NOW
-          </Button>
+          <Link to="/store">
+            <Button
+              variant="solid"
+              w="200px"
+              aria-label="shop now"
+              colorScheme="red"
+              size="lg"
+              mt="10"
+            >
+              SHOP NOW
+            </Button>
+          </Link>
         </Stack>
         <Box px="16" py="14" bg="">
           <Heading fontStyle="italic" fontWeight={300} textAlign="center">

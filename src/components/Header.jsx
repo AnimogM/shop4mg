@@ -1,18 +1,18 @@
 import { Box, Flex, Stack, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
 import { useGlobalContext } from "../context/CartContext";
 
-
 const Cart = ({ d, b }) => {
-  const {onOpen, state} = useGlobalContext()
+  const { onOpen, state } = useGlobalContext();
+
   return (
     <Box onClick={onOpen} pos="relative" display={d} cursor="pointer">
       <FaShoppingCart size={20} />
       <Text
         color="red.300"
         bg="blue.600"
-        rounded="full"
+        rounded="xl"
         w="5"
         h="6"
         fontSize={14}
@@ -31,7 +31,15 @@ const Cart = ({ d, b }) => {
 
 const Header = () => {
   return (
-    <Box px={["5", "16"]} py="4" pos="sticky" top="0" bg="white" shadow="md" zIndex={10}>
+    <Box
+      px={["5", "16"]}
+      py="4"
+      pos="sticky"
+      top="0"
+      bg="white"
+      shadow="md"
+      zIndex={10}
+    >
       <Stack
         direction={["column", "row"]}
         align={{ md: "center" }}
@@ -49,23 +57,26 @@ const Header = () => {
             </Text>
           </Link>
 
-          <Cart d={ ["block", "none"]} b="4"/>
+          <Cart d={["block", "none"]} b="4" />
         </Flex>
         <Flex align="center" alignSelf="center" justify="center" gap="5">
-          <Link to="/">
+          <NavLink
+            to="/"
+            color={(navData) => (navData.isActive ? "red.300" : "")}
+          >
             <Text _hover={{ color: "red.300" }}>Home</Text>
-          </Link>
-          <Link to="/store">
+          </NavLink>
+          <NavLink to="/store" color={(navData) => (navData.isActive ? "red.300" : "")}>
             <Text _hover={{ color: "red.300" }}>Store</Text>
-          </Link>
-          <Link to="/about">
+          </NavLink>
+          <NavLink to="/about" color={(navData) => (navData.isActive ? "red.300" : "")}>
             <Text _hover={{ color: "red.300" }}>About</Text>
-          </Link>
-          <Link to="/contact">
+          </NavLink>
+          <NavLink to="/contact" color={(navData) => (navData.isActive ? "red.300" : "")}>
             <Text _hover={{ color: "red.300" }}>Contact</Text>
-          </Link>
+          </NavLink>
         </Flex>
-        <Cart d={["none", "block"]} b="3"/>
+        <Cart d={["none", "block"]} b="3" />
       </Stack>
     </Box>
   );
