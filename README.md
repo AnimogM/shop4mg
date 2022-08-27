@@ -1,6 +1,7 @@
 # shop4mg
 An e-commerce platform designed to help users shop online, support local businesses and communities.
 
+
 # Built With
 - react
 - chakra ui
